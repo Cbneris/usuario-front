@@ -3,6 +3,8 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } 
 import { LOGIN_FORM } from '../../Util/Forms/LoginForm';
 import { TransaccionesHTTP } from '../../service/transacciones-http';
 import Swal from 'sweetalert2';
+import { Sesion } from '../../service/sesion';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,9 @@ export class Login {
   loginForm!:       FormGroup;
   iniciandoSesion:  boolean = false;
 
-  constructor(    
+  constructor( 
+    private sesionCk:             Sesion,
+    private router:               Router,
     private fb:                   FormBuilder,
     private transaccionesService: TransaccionesHTTP
   ){
@@ -82,7 +86,10 @@ export class Login {
   }
 
   verificaDatosSesion(){
-    
+    if(!this.sesionCk.sesionActiva()){
+      this.router.navigate(['/home']);
+      this.iniciandoSesion = false;
+    }
   }
 
 }
