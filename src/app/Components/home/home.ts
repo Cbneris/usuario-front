@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Nav } from '../estrustura-web/nav/nav';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [Nav],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
