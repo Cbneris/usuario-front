@@ -5,15 +5,13 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class Sesion {
-
-  enSesion: boolean = false;
   
   constructor(private cookieService: CookieService) {}
   
   guardarSesion(login: string, nombreUsuario: string): void {
-    this.cookieService.set('login', login);
-    this.cookieService.set('nombreUsuario', nombreUsuario);
-    this.enSesion = true;
+    const diasExpiracion = 1;
+    this.cookieService.set('login', login, diasExpiracion);
+    this.cookieService.set('nombreUsuario', nombreUsuario, diasExpiracion);
   }
 
   obtenerLogin(): string {
@@ -27,11 +25,10 @@ export class Sesion {
   cerrarSesion(): void {
     this.cookieService.delete('login');
     this.cookieService.delete('nombreUsuario');
-    this.enSesion = false;
   }
 
-  sesionActiva(): boolean{
-    return this.enSesion;
+  sesionActiva(): boolean{    
+    return this.cookieService.check('login') && this.cookieService.check('nombreUsuario');
   }
 
 }
