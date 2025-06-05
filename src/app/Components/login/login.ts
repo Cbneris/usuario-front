@@ -27,7 +27,10 @@ export class Login {
     this.configurarCamposLogin();
   }
   
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log("Datos de la sesion");
+    this.verificaDatosSesion();
+  }
 
   configurarCamposLogin(){
     this.loginForm = this.fb.group( LOGIN_FORM );
@@ -38,7 +41,6 @@ export class Login {
   }
   
   iniciarSesion(){
-    //this.iniciandoSesion = true;
 
     if(!this.loginForm.valid){
       Swal.fire({
@@ -51,8 +53,6 @@ export class Login {
 
     this.transaccionesService.iniciarSesion(this.loginForm.getRawValue())
       .then((response: any) => {
-
-        this.sesionCk.cerrarSesion();
 
         if(response.code == 200){
 
