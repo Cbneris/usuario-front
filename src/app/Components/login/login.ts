@@ -5,6 +5,7 @@ import { TransaccionesHTTP } from '../../service/transacciones-http';
 import Swal from 'sweetalert2';
 import { Sesion } from '../../service/sesion';
 import { Router } from '@angular/router';
+import { TITULO } from '../../Util/Alerta/TipoSeveridad';
 
 @Component({
   selector: 'app-login',
@@ -43,8 +44,9 @@ export class Login {
   iniciarSesion(){
 
     if(!this.loginForm.valid){
+      
       Swal.fire({
-            title: "Error",
+            title: TITULO.ERROR,
             text: "Debe completar los campos para el inicio de sesión",
             icon: "error"
           });
@@ -62,7 +64,7 @@ export class Login {
           );
 
           Swal.fire({
-            title: "Bienvenido",
+            title: TITULO.BIENVENIDA,
             text: response.message,
             icon: "success"
           });
@@ -73,7 +75,7 @@ export class Login {
       }).catch(error=>{        
         if(error.status == 400){
            Swal.fire({
-            title: "Error",
+            title: TITULO.ERROR,
             text: error.error.message,
             icon: "error"
           });
@@ -81,7 +83,7 @@ export class Login {
         
         if(error.status == 403){
            Swal.fire({
-            title: "Atención",
+            title: TITULO.ATENCIÓN,
             text: error.error.message,
             icon: "warning"
           });
