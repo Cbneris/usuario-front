@@ -38,7 +38,8 @@ export class Login {
   }
   
   iniciarSesion(){
-    
+    //this.iniciandoSesion = true;
+
     if(!this.loginForm.valid){
       Swal.fire({
             title: "Error",
@@ -50,18 +51,26 @@ export class Login {
 
     this.transaccionesService.iniciarSesion(this.loginForm.getRawValue())
       .then((response: any) => {
-        console.log(response);
+
+        this.sesionCk.cerrarSesion();
 
         if(response.code == 200){
+
+          this.sesionCk.guardarSesion(
+            response.entity.login, 
+            response.entity.nombre + " " + response.entity.apellidoPaterno + " " + response.entity.apellidoMaterno
+          );
+
           Swal.fire({
             title: "Bienvenido",
             text: response.message,
             icon: "success"
           });
+          
+          this.loginForm.reset();
         }
                 
-      }).catch(error=>{
-        
+      }).catch(error=>{        
         if(error.status == 400){
            Swal.fire({
             title: "Error",
@@ -77,7 +86,6 @@ export class Login {
             icon: "warning"
           });
         }
-
       }).finally(
         () => {
           this.verificaDatosSesion();
@@ -86,7 +94,7 @@ export class Login {
   }
 
   verificaDatosSesion(){
-    if(!this.sesionCk.sesionActiva()){
+    if(this.sesionCk.sesionActiva()){
       this.router.navigate(['/home']);
       this.iniciandoSesion = false;
     }
