@@ -4,7 +4,7 @@ export const USUARIO_FORM = {
     login:              ['', Validators.required],
     password:           ['', Validators.required],
     nombre:             ['', Validators.required],
-    cliente:            ['', Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)], //Patrón para validar decimales
+    cliente:            ['', Validators.required], 
     email:              ['', [Validators.required, Validators.email]],
     intentos:           ['', Validators.required],
     fechaRevocado:      [''],
@@ -12,6 +12,5 @@ export const USUARIO_FORM = {
     noAcceso:           [''],
     apellidoPaterno:    ['', Validators.required],
     apellidoMaterno:    ['', Validators.required],
-    area:               [''],
-    fechaModificacion:  ['']
+    area:               ['']
 }
