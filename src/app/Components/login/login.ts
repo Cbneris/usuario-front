@@ -77,7 +77,7 @@ export class Login {
           this.loginForm.reset();
         }
                 
-      }).catch(error=>{
+      }).catch(error => {
         
         if(error.status == 400){
           ALERTA_MENSAJE(
