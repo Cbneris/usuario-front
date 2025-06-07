@@ -57,7 +57,15 @@ export class GestionUsuarios {
       }
     )
     .catch(error => {
-      
+      if(error.status == 400){
+        ALERTA_MENSAJE(
+          error.error.message,
+          SEVERIDAD.ERROR,
+          TITULO.ERROR,
+          true,
+          true
+        );
+      }
     });
   }
 }
