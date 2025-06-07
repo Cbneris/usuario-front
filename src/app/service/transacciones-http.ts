@@ -26,4 +26,9 @@ export class TransaccionesHTTP {
     return this.http.get(`${this.baseLocalUrl}${this.request.UserController}`).toPromise();
   }
 
+  bajaUsuario(usuario: Usuario) {
+    return this.http.put(`${this.baseLocalUrl}${this.request.UserController}${this.request.BajaUsuario}`, usuario);
+  }
+
+
 }
