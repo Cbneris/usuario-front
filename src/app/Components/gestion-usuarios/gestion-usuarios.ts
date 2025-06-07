@@ -86,4 +86,50 @@ export class GestionUsuarios {
       }
     );
   }
+
+  cargarFormulario(usuario: Usuario): void {
+
+    this.usuarioForm.patchValue({
+      login:          usuario.login,
+      password:       usuario.password,
+      nombre:         usuario.nombre,
+      cliente:        usuario.cliente,
+      email:          usuario.email,
+      intentos:       usuario.intentos,
+      fechaRevocado:  this.formatDateForInput(usuario.fechaRevocado),
+      fechaVigencia:  this.formatDateForInput(usuario.fechaVigencia),
+      noAcceso:       usuario.noAcceso,
+      apellidoPaterno: usuario.apellidoPaterno,
+      apellidoMaterno: usuario.apellidoMaterno,
+      area:           usuario.area,
+      status:         usuario.status
+    });
+    
+  }
+
+  private formatDateForInput(dateInput: string | Date | null | undefined): string | null {
+    if (!dateInput) return null;
+
+    const date  = new Date(dateInput);
+    const year  = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day   = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
+  bajaUsuario(usuario: Usuario): void {
+  this.transaccionesService.bajaUsuario(usuario).subscribe({
+    next: () => {
+      console.log('Usuario dado de baja correctamente');
+      // Opcional: actualizar la lista o el campo status
+      this.cargaListaUsuarios(); // o actualizar solo usuario.status = 'B';
+    },
+    error: (err) => {
+      console.error('Error al dar de baja al usuario', err);
+    }
+  });
+}
+
+
 }
