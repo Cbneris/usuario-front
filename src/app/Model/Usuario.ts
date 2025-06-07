@@ -1,4 +1,4 @@
-export class UsuarioSaveRequest {
+export class Usuario {
 
     login?:             String;
     password?:          String;
@@ -12,5 +12,6 @@ export class UsuarioSaveRequest {
     apellidoPaterno?:   String;
     apellidoMaterno?:   String;
     area?:              String;
+    status?:            String;
 
 }
