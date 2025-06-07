@@ -8,6 +8,7 @@ export class Usuario {
     intentos?:          number;
     fechaRevocado?:     Date;
     fechaVigencia?:     Date;
+    fechaAlta?:         Date;
     noAcceso?:          number;
     apellidoPaterno?:   String;
     apellidoMaterno?:   String;
