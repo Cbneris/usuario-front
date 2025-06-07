@@ -1,7 +1,7 @@
 <app-nav></app-nav>
 <div class="container mt-4">
   <h3 class="mb-4">Formulario de Usuario</h3>
-  <form novalidate>
+  <form [formGroup]="usuarioForm">
     <div class="row">
       <div class="col-md-3 mb-3">
         <label>Login</label>
@@ -19,13 +19,23 @@
       </div>
 
       <div class="col-md-3 mb-3">
-        <label>Cliente</label>
-        <input type="text" class="form-control" formControlName="cliente">
+        <label>Apellido Paterno</label>
+        <input type="text" class="form-control" formControlName="apellidoPaterno">
+      </div>
+
+      <div class="col-md-3 mb-3">
+        <label>Apellido Materno</label>
+        <input type="text" class="form-control" formControlName="apellidoMaterno">
       </div>
 
       <div class="col-md-3 mb-3">
         <label>Email</label>
         <input type="email" class="form-control" formControlName="email">
+      </div>
+
+      <div class="col-md-3 mb-3">
+        <label>Cliente</label>
+        <input type="number" step="0.00" class="form-control" formControlName="cliente">
       </div>
 
       <div class="col-md-3 mb-3">
@@ -49,26 +59,55 @@
       </div>
 
       <div class="col-md-3 mb-3">
-        <label>Apellido Paterno</label>
-        <input type="text" class="form-control" formControlName="apellidoPaterno">
-      </div>
-
-      <div class="col-md-3 mb-3">
-        <label>Apellido Materno</label>
-        <input type="text" class="form-control" formControlName="apellidoMaterno">
-      </div>
-
-      <div class="col-md-3 mb-3">
         <label>Área</label>
         <input type="text" class="form-control" formControlName="area">
       </div>
-
-      <div class="col-md-3 mb-3">
-        <label>Fecha de Modificación</label>
-        <input type="date" class="form-control" formControlName="fechaModificacion">
-      </div>
     </div>
 
-    <button class="btn btn-primary mt-3" >Guardar</button>
+    <button class="btn btn-primary mt-3" (click)="guardaUsuario()">Guardar</button>
   </form>
+</div>
+
+
+<div class="pt-3 container">
+  <div>
+
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Login</th>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>Email</th>
+          <th>Fecha Alta</th>
+          <th>Área</th>
+          <th>Status</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of listUsuarios; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ usuario.login }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.apellidoPaterno }}</td>
+          <td>{{ usuario.apellidoMaterno }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.fechaAlta | date:'yyyy-MM-dd' }}</td>
+          <td>{{ usuario.area }}</td>
+          <td>{{ usuario.status }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary me-1" (click)="cargarFormulario(usuario)">
+              Editar
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="bajaUsuario(usuario)">
+              Baja
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
