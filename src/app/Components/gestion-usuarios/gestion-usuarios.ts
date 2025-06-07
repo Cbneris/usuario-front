@@ -121,9 +121,7 @@ export class GestionUsuarios {
   bajaUsuario(usuario: Usuario): void {
   this.transaccionesService.bajaUsuario(usuario).subscribe({
     next: () => {
-      console.log('Usuario dado de baja correctamente');
-      // Opcional: actualizar la lista o el campo status
-      this.cargaListaUsuarios(); // o actualizar solo usuario.status = 'B';
+      this.cargaListaUsuarios();
     },
     error: (err) => {
       console.error('Error al dar de baja al usuario', err);
