@@ -95,10 +95,17 @@
           <td>{{ usuario.apellidoPaterno }}</td>
           <td>{{ usuario.apellidoMaterno }}</td>
           <td>{{ usuario.email }}</td>
-          <td>{{ usuario.fechaAlta | date:'dd/MM/yyyy' }}</td>
+          <td>{{ usuario.fechaAlta | date:'yyyy-MM-dd' }}</td>
           <td>{{ usuario.area }}</td>
           <td>{{ usuario.status }}</td>
-          
+          <td>
+            <button class="btn btn-sm btn-primary me-1" (click)="cargarFormulario(usuario)">
+              Editar
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="bajaUsuario(usuario)">
+              Baja
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
