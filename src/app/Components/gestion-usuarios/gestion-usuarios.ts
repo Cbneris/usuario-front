@@ -1,20 +1,24 @@
 import { Nav }                    from '../estrustura-web/nav/nav';
+import { TITULO }                 from '../../Util/Alerta/TituloMsg';
 import { Component }              from '@angular/core';
+import { SEVERIDAD }              from '../../Util/Alerta/TipoSeveridad';
 import { USUARIO_FORM }           from '../../Util/Forms/usuarioForm';
+import { ALERTA_MENSAJE }         from '../../Util/Alerta/AlertasFn';
+import { TransaccionesHTTP }      from '../../service/transacciones-http';
 import { FormBuilder, FormGroup, ReactiveFormsModule  } from '@angular/forms';
-import { TransaccionesHTTP } from '../../service/transacciones-http';
-import { ALERTA_MENSAJE } from '../../Util/Alerta/AlertasFn';
-import { SEVERIDAD } from '../../Util/Alerta/TipoSeveridad';
-import { TITULO } from '../../Util/Alerta/TituloMsg';
+import { Usuario } from '../../Model/Usuario';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-gestion-usuarios',
-  imports: [Nav, ReactiveFormsModule],
-  templateUrl: './gestion-usuarios.html',
-  styleUrl: './gestion-usuarios.css'
+  selector:     'app-gestion-usuarios',
+  imports:      [Nav, ReactiveFormsModule, CommonModule],
+  templateUrl:  './gestion-usuarios.html',
+  styleUrl:     './gestion-usuarios.css'
 })
+
 export class GestionUsuarios {
-  usuarioForm!: FormGroup;
+  usuarioForm!:   FormGroup;
+  listUsuarios:   Usuario [] = [];
 
   constructor(    
     private fb:                   FormBuilder,
@@ -23,6 +27,15 @@ export class GestionUsuarios {
 
   ngOnInit(): void {
     this.configurarCamposUsuario();
+    this.cargaListaUsuarios();
+  }
+
+  cargaListaUsuarios() {
+    this.transaccionesService.cargaListUsuarios()
+    .then((response : any) => {
+      console.log(response.entity);
+      this.listUsuarios = response.entity
+    })
   }
 
   configurarCamposUsuario(){
@@ -66,6 +79,11 @@ export class GestionUsuarios {
           true
         );
       }
-    });
+    })
+    .finally(
+      () => {
+        this.cargaListaUsuarios();
+      }
+    );
   }
 }
