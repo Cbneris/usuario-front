@@ -12,5 +12,6 @@ export const USUARIO_FORM = {
     noAcceso:           [''],
     apellidoPaterno:    ['', Validators.required],
     apellidoMaterno:    ['', Validators.required],
-    area:               ['']
+    area:               [''],
+    status:             ['']
 }
