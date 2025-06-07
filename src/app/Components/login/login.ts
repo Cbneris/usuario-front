@@ -5,7 +5,9 @@ import { TransaccionesHTTP } from '../../service/transacciones-http';
 import Swal from 'sweetalert2';
 import { Sesion } from '../../service/sesion';
 import { Router } from '@angular/router';
-import { TITULO } from '../../Util/Alerta/TipoSeveridad';
+import { SEVERIDAD } from '../../Util/Alerta/TipoSeveridad';
+import { ALERTA_MENSAJE } from '../../Util/Alerta/AlertasFn';
+import { TITULO } from '../../Util/Alerta/TituloMsg';
 
 @Component({
   selector: 'app-login',
@@ -44,13 +46,14 @@ export class Login {
   iniciarSesion(){
 
     if(!this.loginForm.valid){
-      
-      Swal.fire({
-            title: TITULO.ERROR,
-            text: "Debe completar los campos para el inicio de sesión",
-            icon: "error"
-          });
-          return;
+      ALERTA_MENSAJE(
+        "Debe completar los campos para el inicio de sesión",
+        SEVERIDAD.ERROR,
+        TITULO.ERROR,
+        true,
+        true
+      );
+      return;
     }
 
     this.transaccionesService.iniciarSesion(this.loginForm.getRawValue())
@@ -63,30 +66,37 @@ export class Login {
             response.entity.nombre + " " + response.entity.apellidoPaterno + " " + response.entity.apellidoMaterno
           );
 
-          Swal.fire({
-            title: TITULO.BIENVENIDA,
-            text: response.message,
-            icon: "success"
-          });
+          ALERTA_MENSAJE(
+            response.message,
+            SEVERIDAD.SUCCESS,
+            TITULO.BIENVENIDA,
+            true,
+            true
+          );
           
           this.loginForm.reset();
         }
                 
-      }).catch(error=>{        
+      }).catch(error=>{
+        
         if(error.status == 400){
-           Swal.fire({
-            title: TITULO.ERROR,
-            text: error.error.message,
-            icon: "error"
-          });
+          ALERTA_MENSAJE(
+            error.error.message,
+            SEVERIDAD.ERROR,
+            TITULO.ERROR,
+            true,
+            true
+          );
         }
         
         if(error.status == 403){
-           Swal.fire({
-            title: TITULO.ATENCIÓN,
-            text: error.error.message,
-            icon: "warning"
-          });
+          ALERTA_MENSAJE(
+            error.error.message,
+            SEVERIDAD.WARNING,
+            TITULO.ERROR,
+            true,
+            true
+          );
         }
       }).finally(
         () => {
