@@ -8,5 +8,6 @@ export class RequestMapping {
     GuardarUsuarioNuevo =   "/encriptionSave";
     ActualizaUsuario    =   "/update";
     BajaUsuario         =   "/bajausuario";
+    allUsers            =   "/buscaAllUsers";
 
 }
