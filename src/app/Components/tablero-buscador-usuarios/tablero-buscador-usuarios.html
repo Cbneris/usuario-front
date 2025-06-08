@@ -1,17 +1,17 @@
 <app-nav></app-nav>
 
 <div id="FindByStatus" class="container pt-3">
-    <div class="row text-center">
-        <div class="col-sm-4">
-            <button type="button" class="btn btn-success">Activos</button>
-        </div>
-        <div class="col-sm-4">
-            <button type="button" class="btn btn-secondary">Inactivos</button>
-        </div>
-        <div class="col-sm-4">
-            <button type="button" class="btn btn-warning">Revocados</button>
-        </div>
+  <div class="row text-center">
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-success" (click)="filtrarPorStatus('A')">Activos</button>
     </div>
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-secondary" (click)="filtrarPorStatus('B')">Inactivos</button>
+    </div>
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-warning" (click)="filtrarPorStatus('R')">Revocados</button>
+    </div>
+  </div>
 </div>
 
 <div class="container pt-3">
