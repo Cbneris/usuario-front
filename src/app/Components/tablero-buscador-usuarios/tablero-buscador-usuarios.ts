@@ -36,4 +36,8 @@ export class TableroBuscadorUsuarios {
     this.listUsuarios = this.listaOriginalUsuarios.filter(usuario => usuario.status === status);
   }
 
+  limpiafiltros(){
+    this.listUsuarios = this.listaOriginalUsuarios;
+  }
+
 }
