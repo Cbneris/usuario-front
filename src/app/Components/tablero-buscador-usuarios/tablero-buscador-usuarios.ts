@@ -13,7 +13,8 @@ import { TransaccionesHTTP }  from '../../service/transacciones-http';
 
 export class TableroBuscadorUsuarios {
   
-  listUsuarios:   Usuario [] = [];
+  listUsuarios:           Usuario[] = [];
+  listaOriginalUsuarios:  Usuario[] = [];
 
   constructor(
       private transaccionesService: TransaccionesHTTP
@@ -26,13 +27,13 @@ export class TableroBuscadorUsuarios {
   cargaListaUsuarios() {
     this.transaccionesService.cargaListUsuarios()
     .then((response : any) => {
-      console.log(response.entity);
-      this.listUsuarios = response.entity
+      this.listaOriginalUsuarios = response.entity
+      this.listUsuarios = [...this.listaOriginalUsuarios];
     })
   }
 
-  busquedaStatusA(){
-    
+  filtrarPorStatus(status: string) {
+    this.listUsuarios = this.listaOriginalUsuarios.filter(usuario => usuario.status === status);
   }
 
 }
