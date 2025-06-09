@@ -1,0 +1,81 @@
+<app-nav></app-nav>
+
+<div id="FindByStatus" class="container pt-3">
+  <div class="row text-center">
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-success" (click)="filtrarPorStatus('A')">Activos</button>
+    </div>
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-secondary" (click)="filtrarPorStatus('B')">Inactivos</button>
+    </div>
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-warning" (click)="filtrarPorStatus('R')">Revocados</button>
+    </div>
+  </div>
+</div>
+
+<div class="container pt-3">
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="nombreFiltro">
+        </div>
+        <div class="col-sm-4">
+            <label for="fechaInicial">Fecha de alta:</label>
+            <input type="date" name="fechaInicial" id="fechaInicial" class="form-control"
+                [(ngModel)]="fechaAltaStr"
+                (change)="onFechaAltaChange()">
+        </div>
+        <div class="col-sm-4">
+            <label for="fechaFin">Fecha de baja:</label>
+            <input type="date" name="fechaFin" id="fechaFin" class="form-control"                
+                [(ngModel)]="fechaBajaStr"
+                (change)="onFechaBajaChange()">
+        </div>
+    </div>
+</div>
+
+<div class="container pt-3">
+    <div class="col-sm-3 text-center d-grid gap-2 col-6 mx-auto">
+        <button type="button" class="btn btn-primary btn-lg" (click)="busquedaPorFiltros()">Buscar</button>
+    </div>
+</div>
+
+<div class="pt-3 container">
+  <div>
+
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Login</th>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>Email</th>
+          <th>Fecha Alta</th>
+          <th>Área</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of listUsuarios; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ usuario.login }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.apellidoPaterno }}</td>
+          <td>{{ usuario.apellidoMaterno }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.fechaAlta | date:'yyyy-MM-dd' }}</td>
+          <td>{{ usuario.area }}</td>
+          <td>{{ usuario.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="col-sm-12 text-center pt-2">
+  <button type="button" class="btn btn-outline-dark" (click)="muestraListaOriginal()">Mostrar Todo</button>
+  <button type="button" class="btn btn-outline-dark" (click)="limpiafiltros()">LimpiaFiltros</button>
+</div>

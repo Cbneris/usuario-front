@@ -23,7 +23,7 @@ export class TransaccionesHTTP {
   }
 
   cargaListUsuarios(){
-    return this.http.get(`${this.baseLocalUrl}${this.request.UserController}`).toPromise();
+    return this.http.get(`${this.baseLocalUrl}${this.request.UserController}${this.request.allUsers}`).toPromise();
   }
 
   bajaUsuario(usuario: Usuario) {

@@ -1,18 +1,19 @@
 export class Usuario {
 
-    login?:             String;
-    password?:          String;
-    nombre?:            String;
+    login?:             string;
+    password?:          string;
+    nombre?:            string;
     cliente?:           number;
-    email?:             String;
+    email?:             string;
     intentos?:          number;
     fechaRevocado?:     Date;
     fechaVigencia?:     Date;
     fechaAlta?:         Date;
+    fechaBaja?:         Date;
     noAcceso?:          number;
-    apellidoPaterno?:   String;
-    apellidoMaterno?:   String;
-    area?:              String;
-    status?:            String;
+    apellidoPaterno?:   string;
+    apellidoMaterno?:   string;
+    area?:              string;
+    status?:            string;
 
 }
