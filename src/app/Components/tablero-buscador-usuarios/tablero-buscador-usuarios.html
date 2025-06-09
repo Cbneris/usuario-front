@@ -18,22 +18,26 @@
     <div class="row">
         <div class="col-sm-4">
             <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" id="nombre" class="form-control">
+            <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="nombreFiltro">
         </div>
         <div class="col-sm-4">
-            <label for="fechaInicial">Fecha de alta inicial:</label>
-            <input type="date" name="fechaInicial" id="fechaInicial" class="form-control">
+            <label for="fechaInicial">Fecha de alta:</label>
+            <input type="date" name="fechaInicial" id="fechaInicial" class="form-control"
+                [(ngModel)]="fechaAltaStr"
+                (change)="onFechaAltaChange()">
         </div>
         <div class="col-sm-4">
-            <label for="fechaFin">Fecha de alta final:</label>
-            <input type="date" name="fechaFin" id="fechaFin" class="form-control">
+            <label for="fechaFin">Fecha de baja:</label>
+            <input type="date" name="fechaFin" id="fechaFin" class="form-control"                
+                [(ngModel)]="fechaBajaStr"
+                (change)="onFechaBajaChange()">
         </div>
     </div>
 </div>
 
 <div class="container pt-3">
     <div class="col-sm-3 text-center d-grid gap-2 col-6 mx-auto">
-        <button type="button" class="btn btn-primary btn-lg">Buscar</button>
+        <button type="button" class="btn btn-primary btn-lg" (click)="busquedaPorFiltros()">Buscar</button>
     </div>
 </div>
 
@@ -69,4 +73,9 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="col-sm-12 text-center pt-2">
+  <button type="button" class="btn btn-outline-dark" (click)="muestraListaOriginal()">Mostrar Todo</button>
+  <button type="button" class="btn btn-outline-dark" (click)="limpiafiltros()">LimpiaFiltros</button>
 </div>
